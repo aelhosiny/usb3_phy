@@ -1,0 +1,68 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\makeindex
+\usepackage{graphicx}
+\author{Amr Elhosiny}
+
+\begin{document}
+
+\title{USB 3.1 PHY Implementation}
+
+\maketitle
+
+\section{HDL Language}
+VHDL will be used for RTL coding. Verilog and/or VHDL will be used for test bench coding.
+
+
+
+\section{Package}
+A VHDL package will be created listing:
+\begin{itemize}
+	\item All hard-coded packet types in the document will be defined with names to be easily compared and detected in the RTL.
+	\item It will define needed functions.
+	\item Packages and functions specific for test benches will be in separate packages.
+\end{itemize}
+
+\section{Clock Generator}
+There will be a central clock generator module which generates divided clocks, gated clocks. It may instantiate FPGA specific modules like BUFGE's.
+
+\section{Packet Generation \& Detection}
+
+There are many design alternatives listed below.
+
+\subsection{Packet Type Detector}
+Depending on packet type, some blocks or functions are enabled or disable. There will be a central packet type detector module with an active high output bit for each packet type. For packets that have common effect on loaded modules or functions, more possible outputs may be grouped into less or single output bit.
+The type of packet will decide the behaviour of the data path modules.
+
+\subsection{State Machine}
+Packet driver may be a state machine implementing some features of the link layer. It will transmit/receive certain sequences and implement limited link layer features. It will then produce required control signals defining the type of transmitted/received packet to control the behaviour of the datapath modules.
+Examples for the link layer features that may be implemented :
+\begin{itemize}
+	\item A state machine will handle link initialization.
+	\item Then sending data packet.
+\end{itemize}
+
+A set of assumptions will be made to simplify the state machines and the implementation for example implementing specific not all modes of operation.
+
+\subsection{Downstream \& Upstream Ports}
+The host machine will implement extra features not present in the USB device.
+
+
+\section{Scrambler}
+Will have a toplevel consists of a scrambler core alongside with a controller. The controller will tell the core to enable or disable scrambling, advance the LFSR, XOR or do not XOR data.
+
+
+\subsection{Gen-1}
+
+\subsection{Gen-2}
+
+
+
+
+
+\end{document}
