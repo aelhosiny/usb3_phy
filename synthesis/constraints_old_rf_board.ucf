@@ -1,0 +1,63 @@
+
+NET  "CLK_IN"   LOC = "AB13" |IOSTANDARD = LVCMOS33;
+#NET  "CLK_IN"   TNM_NET = "CLK_IN";
+#TIMESPEC TS_CLK_IN = PERIOD "CLK_IN" 36.0 ns HIGH 50 %;
+
+# ONBOARD LEDS
+NET  "LEDS<0>"    LOC = "Y17"   |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "LEDS<1>"    LOC = "AB17"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "LEDS<2>"    LOC = "AA14"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "LEDS<3>"    LOC = "AB14"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "LEDS<4>"    LOC = "AA16"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "LEDS<5>"    LOC = "AB16"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "LEDS<6>"    LOC = "AA10"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "LEDS<7>"    LOC = "AB10"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+
+# Xtensa JTAG Interface
+NET  "JTRST"      LOC="G16"     |IOSTANDARD = LVCMOS33 |PULLUP                 ; # 
+NET  "JTDI"       LOC="F20"     |IOSTANDARD = LVCMOS33 |PULLUP                 ; # 
+NET  "JTMS"       LOC="H19"     |IOSTANDARD = LVCMOS33 |PULLUP                 ; # 
+NET  "JTDO"       LOC="J19"     |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ; # 
+NET  "rst_n"      LOC="F16"     |IOSTANDARD = LVCMOS33 |PULLUP                 ; # 
+NET  "JTCK"       LOC="K20"     |IOSTANDARD = LVCMOS33 |PULLUP                 ; # 
+
+NET  "JTCK"   TNM_NET = "JTCK";
+TIMESPEC TS_JTCK = PERIOD "JTCK" 32 ns HIGH 50%;
+
+##SPI Signals
+NET  "spi_sck"    LOC = "E16"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "spi_cs_n"   LOC = "C8"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "spi_mosi"   LOC = "R19"   |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "spi_miso"   LOC = "U19"  |IOSTANDARD = LVCMOS33;
+
+## RF signals
+NET  "phy_ce"            LOC = "D14"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "phy_clk_ena"       LOC = "C5"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "phy_tx_srl_bit"    LOC = "M18"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+NET  "phy_dout_i"        LOC = "T20"  |IOSTANDARD = LVCMOS33;
+NET  "phy_dout_q"        LOC = "W20"  |IOSTANDARD = LVCMOS33;
+NET  "phy_rst_n"         LOC = "N16"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 8 ;
+
+#### Debug port
+NET  "debug<0>"         LOC = "T21"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-41
+NET  "debug<1>"         LOC = "U22"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-44
+NET  "debug<2>"         LOC = "P21"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-45
+NET  "debug<3>"         LOC = "R22"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-48
+NET  "debug<4>"         LOC = "M21"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-49
+NET  "debug<5>"         LOC = "N22"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-52
+NET  "debug<6>"         LOC = "L20"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-53
+NET  "debug<7>"         LOC = "L19"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-58
+NET  "debug<8>"         LOC = "H21"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-59
+NET  "debug<9>"         LOC = "K22"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-62
+NET  "debug<10>"        LOC = "F21"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-63
+NET  "debug<11>"        LOC = "G22"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-66
+NET  "debug<12>"        LOC = "D21"  |IOSTANDARD = LVCMOS33 |SLEW = SLOW |DRIVE = 4 ;  #JP1B-67
+
+
+
+
+
+
+
+
+
