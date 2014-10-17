@@ -18,6 +18,8 @@
 \section{HDL Language}
 VHDL will be used for RTL coding. Verilog and/or VHDL will be used for test bench coding.
 
+\section{FPGA Device Family}
+Will use Xilinx Spartan-6 FPGA for speed and cost considerations. Also it has a low power category.
 
 
 \section{Package}
@@ -62,7 +64,14 @@ Will have a toplevel consists of a scrambler core alongside with a controller. T
 \subsection{Gen-2}
 
 
-
-
+\section{ToDo}
+\begin{itemize}
+	\item Define clock rates according to datapath width changes. All clocks will be generated from DCM's to guarantee the phase relation and domains.
+	\item The core clock should meet two conditions:
+	\begin{enumerate}
+		\item It should be related to the serial to parallel input rate with an integer relation.
+		\item It should be related to all needed datapath clocks with and integer relation.
+	\end{enumerate}
+\end{itemize}
 
 \end{document}
