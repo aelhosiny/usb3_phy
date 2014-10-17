@@ -1,5 +1,5 @@
 vhdl work $ROOT_DIR/source/rtl/encoder/enc_8_10_rdp.vhd
 vhdl work $ROOT_DIR/source/rtl/encoder/enc_8_10_rdn.vhd
+vhdl work $ROOT_DIR/source/rtl/encoder/enc_8_10.vhd
 vhdl work $ROOT_DIR/source/rtl/decoder/dec_8_10_rdn.vhd
 vhdl work $ROOT_DIR/source/rtl/decoder/dec_8_10_rdp.vhd
-

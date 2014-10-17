@@ -3,7 +3,7 @@
 ## Clean old compilation results
 ## Keep the reports only
 
-toplevel=$1
+export toplevel=$1
 
 export ROOT_DIR=`echo $PWD | sed 's_/scripts/synthesis__'`
 echo "root dir is $ROOT_DIR"
