@@ -6,3 +6,5 @@ vhdl work $ROOT_DIR/source/rtl/decoder/dec_8_10_rdp.vhd
 vhdl work $ROOT_DIR/source/rtl/pkg/usb3_pkg.vhd
 vhdl work $ROOT_DIR/source/rtl/scrambler/scrambler_core_gen1.vhd
 vhdl work $ROOT_DIR/source/rtl/scrambler/scrambler_core_gen2.vhd
+vhdl work $ROOT_DIR/source/rtl/hs/hs_1to1.vhd
+
