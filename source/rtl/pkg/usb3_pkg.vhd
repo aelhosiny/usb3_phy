@@ -6,7 +6,7 @@
 -- Author     : amr  <amr@laptop>
 -- Company    : 
 -- Created    : 2014-10-17
--- Last update: 2014-10-17
+-- Last update: 20-10-2014
 -- Platform   : 
 -- Standard   : VHDL'87
 -------------------------------------------------------------------------------
@@ -566,7 +566,9 @@ package usb3_pkg is
   constant k29_7_p : std_logic_vector(9 downto 0) := "0100010111";
   constant k30_7_n : std_logic_vector(9 downto 0) := "0111101000";
   constant k30_7_p : std_logic_vector(9 downto 0) := "1000010111";
-  
+
+  constant lfsr_init_gen1_c : std_logic_vector(15 downto 0) := x"FFFF";
+  constant lfsr_init_gen2_c : std_logic_vector(22 downto 0) := "001" & x"DBFBC";
 
 end usb3_pkg;
 

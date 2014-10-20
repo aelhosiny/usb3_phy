@@ -6,7 +6,7 @@
 -- Author     : amr  <amr@laptop>
 -- Company    : 
 -- Created    : 2014-10-17
--- Last update: 2014-10-18
+-- Last update: 20-10-2014
 -- Platform   : 
 -- Standard   : VHDL'87
 -------------------------------------------------------------------------------
@@ -21,7 +21,7 @@
 library ieee;
 use ieee.numeric_std.all;
 use ieee.std_logic_1164.all;
-
+use work.usb3_pkg.all;
 
 entity scrambler_core_gen2 is
   
@@ -39,19 +39,19 @@ entity scrambler_core_gen2 is
     din          : in  std_logic_vector(7 downto 0);
     -- Input data byte
     dout         : out std_logic_vector(7 downto 0)
-    -- Scrambled output
+   -- Scrambled output
     );
 
 end scrambler_core_gen2;
 
 architecture behav of scrambler_core_gen2 is
 
-  signal   lfsr_reg      : std_logic_vector(22 downto 0) := x"FFFF";
-  type     lfsr_t is array (0 to 8) of std_logic_vector(22 downto 0);
-  signal   lfsr_a        : lfsr_t;
-  signal   din_int       : std_logic_vector(7 downto 0);
-  signal   dout_nxt      : std_logic_vector(7 downto 0);
-  signal   dout_reg      : std_logic_vector(7 downto 0)  := (others => '0');
+  signal lfsr_reg        : std_logic_vector(22 downto 0) := lfsr_init_gen2_c;
+  type lfsr_t is array (0 to 8) of std_logic_vector(22 downto 0);
+  signal lfsr_a          : lfsr_t;
+  signal din_int         : std_logic_vector(7 downto 0);
+  signal dout_nxt        : std_logic_vector(7 downto 0);
+  signal dout_reg        : std_logic_vector(7 downto 0)  := (others => '0');
   constant data_mirror_c : std_logic                     := '0';
   
 begin  -- behav
@@ -69,15 +69,15 @@ begin  -- behav
 
   lfsr_states_o : for i in 1 to 8 generate
     lfsr_states_i : for j in 0 to 22 generate
-      xor_regs1 : if (j = 0 or j = 2 or j = 5 or j = 8 or j=16 or j=21) generate
-        lfsr_a(i)(0) <= lfsr_a(i-1)(22);
-        lfsr_a(i)(2) <= lfsr_a(i-1)(22) xor lfsr_a(i-1)(1);
-        lfsr_a(i)(5) <= lfsr_a(i-1)(22) xor lfsr_a(i-1)(4);
-        lfsr_a(i)(8) <= lfsr_a(i-1)(22) xor lfsr_a(i-1)(7);
+      xor_regs1 : if (j = 0 or j = 2 or j = 5 or j = 8 or j = 16 or j = 21) generate
+        lfsr_a(i)(0)  <= lfsr_a(i-1)(22);
+        lfsr_a(i)(2)  <= lfsr_a(i-1)(22) xor lfsr_a(i-1)(1);
+        lfsr_a(i)(5)  <= lfsr_a(i-1)(22) xor lfsr_a(i-1)(4);
+        lfsr_a(i)(8)  <= lfsr_a(i-1)(22) xor lfsr_a(i-1)(7);
         lfsr_a(i)(16) <= lfsr_a(i-1)(22) xor lfsr_a(i-1)(15);
         lfsr_a(i)(21) <= lfsr_a(i-1)(22) xor lfsr_a(i-1)(20);
       end generate xor_regs1;
-      xor_regs2 : if (j /= 0 and j /= 2 and j /= 4 and j /= 8 and j/=16 and j/=21) generate
+      xor_regs2 : if (j /= 0 and j /= 2 and j /= 5 and j /= 8 and j /= 16 and j /= 21) generate
         lfsr_a(i)(j) <= lfsr_a(i-1)(j-1);
       end generate xor_regs2;
     end generate lfsr_states_i;
@@ -93,10 +93,10 @@ begin  -- behav
   begin  -- process clk_pr
     if rising_edge(clk) then
       if rst = '1' then
-        lfsr_reg <= x"FFFF";
+        lfsr_reg <= lfsr_init_gen2_c;
       else
         if init_lfsr = '1' then
-          lfsr_reg <= x"FFFF";
+          lfsr_reg <= lfsr_init_gen2_c;
         elsif advance_lfsr = '1' then
           lfsr_reg <= lfsr_a(8);
         end if;

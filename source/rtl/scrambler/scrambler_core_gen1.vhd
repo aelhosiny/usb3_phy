@@ -6,7 +6,7 @@
 -- Author     : amr  <amr@laptop>
 -- Company    : 
 -- Created    : 2014-10-17
--- Last update: 2014-10-18
+-- Last update: 20-10-2014
 -- Platform   : 
 -- Standard   : VHDL'87
 -------------------------------------------------------------------------------
@@ -22,7 +22,7 @@
 library ieee;
 use ieee.numeric_std.all;
 use ieee.std_logic_1164.all;
-
+use work.usb3_pkg.all;
 
 entity scrambler_core_gen1 is
   
@@ -47,7 +47,7 @@ end scrambler_core_gen1;
 
 architecture behav of scrambler_core_gen1 is
 
-  signal   lfsr_reg      : std_logic_vector(15 downto 0) := x"FFFF";
+  signal   lfsr_reg      : std_logic_vector(15 downto 0) := lfsr_init_gen1_c;
   type     lfsr_t is array (0 to 8) of std_logic_vector(15 downto 0);
   signal   lfsr_a        : lfsr_t;
   signal   din_int       : std_logic_vector(7 downto 0);
@@ -92,10 +92,10 @@ begin  -- behav
   begin  -- process clk_pr
     if rising_edge(clk) then
       if rst = '1' then
-        lfsr_reg <= x"FFFF";
+        lfsr_reg <= lfsr_init_gen1_c;
       else
         if init_lfsr = '1' then
-          lfsr_reg <= x"FFFF";
+          lfsr_reg <= lfsr_init_gen1_c;
         elsif advance_lfsr = '1' then
           lfsr_reg <= lfsr_a(8);
         end if;
