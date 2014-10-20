@@ -6,7 +6,7 @@
 -- Author     : amr  <amr@laptop>
 -- Company    : 
 -- Created    : 2014-10-17
--- Last update: 20-10-2014
+-- Last update: 21-10-2014
 -- Platform   : 
 -- Standard   : VHDL'87
 -------------------------------------------------------------------------------
@@ -570,35 +570,21 @@ package usb3_pkg is
   constant lfsr_init_gen1_c : std_logic_vector(15 downto 0) := x"FFFF";
   constant lfsr_init_gen2_c : std_logic_vector(22 downto 0) := "001" & x"DBFBC";
 
-  function ones_count(d  : std_logic_vector) return natural;
-  function zeros_count(d : std_logic_vector) return natural;
+  function log2 (inlength : integer) return integer;
   
 end usb3_pkg;
 
 package body usb3_pkg is
 
-  function ones_count(d : std_logic_vector) return natural is
-    variable ones_count_m : natural := 0;   -- Intermediate/temp ones count
-  begin
-    for i in d'length-1 downto 0 loop
-      if d(i) = '1' then
-        ones_count_m := ones_count_m + 1;
-      end if;
-    end loop;  -- i
-    return ones_count_m;
-  end ones_count;
-  function zeros_count(d : std_logic_vector) return natural is
-    variable zeros_count_m : natural := 0;  -- Intermediate/temp ones count
-  begin
-    for i in d'length-1 downto 0 loop
-      if d(i) = '0' then
-        zeros_count_m := zeros_count_m + 1;
-      end if;
-    end loop;  -- i
-    return zeros_count_m;
-  end zeros_count;
 
-
+  function log2 (inlength : integer) return integer is
+    variable i : integer := 1;
+  begin
+    while 2**i < inlength loop
+      i := i+1;
+    end loop;  -- i
+    return i;
+  end function log2;
   
 end usb3_pkg;
 
