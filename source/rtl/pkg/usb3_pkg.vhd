@@ -567,6 +567,17 @@ package usb3_pkg is
   constant k30_7_n : std_logic_vector(9 downto 0) := "0111101000";
   constant k30_7_p : std_logic_vector(9 downto 0) := "1000010111";
 
+  constant SKP_gen2    : std_logic_vector(7 downto 0) := x"CC";
+  constant SKPEND_gen2 : std_logic_vector(7 downto 0) := x"33";
+  constant SDP_gen2    : std_logic_vector(7 downto 0) := x"96";
+  constant EDP_gen2    : std_logic_vector(7 downto 0) := x"69";
+  constant SHP_gen2    : std_logic_vector(7 downto 0) := x"9A";
+  constant DPHP_gen2   : std_logic_vector(7 downto 0) := x"95";
+  constant END_gen2    : std_logic_vector(7 downto 0) := x"65";
+  constant SLC_gen2    : std_logic_vector(7 downto 0) := x"5A";
+  constant EPF_gen2    : std_logic_vector(7 downto 0) := x"36";
+  constant SDS_gen2    : std_logic_vector(7 downto 0) := x"63";
+
   constant lfsr_init_gen1_c : std_logic_vector(15 downto 0) := x"FFFF";
   constant lfsr_init_gen2_c : std_logic_vector(22 downto 0) := "001" & x"DBFBC";
 
