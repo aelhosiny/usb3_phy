@@ -543,7 +543,7 @@ package usb3_pkg is
 
   -- 8b/10b special character symbol code
   constant k28_0_n : std_logic_vector(9 downto 0) := "0011110100";
-  constant k28_0_p : std_logic_vector(9 downto 0) := "0011110100";
+  constant k28_0_p : std_logic_vector(9 downto 0) := "1100001011";
   constant k28_1_n : std_logic_vector(9 downto 0) := "0011111001";
   constant k28_1_p : std_logic_vector(9 downto 0) := "1100000110";
   constant k28_2_n : std_logic_vector(9 downto 0) := "0011110101";
