@@ -6,7 +6,7 @@
 -- Author     : amr  <amr@laptop>
 -- Company    : 
 -- Created    : 2014-10-17
--- Last update: 21-10-2014
+-- Last update: 24-10-2014
 -- Platform   : 
 -- Standard   : VHDL'87
 -------------------------------------------------------------------------------
@@ -566,6 +566,19 @@ package usb3_pkg is
   constant k29_7_p : std_logic_vector(9 downto 0) := "0100010111";
   constant k30_7_n : std_logic_vector(9 downto 0) := "0111101000";
   constant k30_7_p : std_logic_vector(9 downto 0) := "1000010111";
+
+  constant op_k28_0 : std_logic_vector(3 downto 0) := "0000";
+  constant op_k28_1 : std_logic_vector(3 downto 0) := "0001";
+  constant op_k28_2 : std_logic_vector(3 downto 0) := "0010";
+  constant op_k28_3 : std_logic_vector(3 downto 0) := "0011";
+  constant op_k28_4 : std_logic_vector(3 downto 0) := "0100";
+  constant op_k28_5 : std_logic_vector(3 downto 0) := "0101";
+  constant op_k28_6 : std_logic_vector(3 downto 0) := "0110";
+  constant op_k28_7 : std_logic_vector(3 downto 0) := "0111";
+  constant op_k23_7 : std_logic_vector(3 downto 0) := "1000";
+  constant op_k27_7 : std_logic_vector(3 downto 0) := "1001";
+  constant op_k29_7 : std_logic_vector(3 downto 0) := "1010";
+  constant op_k30_7 : std_logic_vector(3 downto 0) := "1011";
 
   constant SKP_gen2    : std_logic_vector(7 downto 0) := x"CC";
   constant SKPEND_gen2 : std_logic_vector(7 downto 0) := x"33";

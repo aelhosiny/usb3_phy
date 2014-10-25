@@ -6,7 +6,7 @@
 -- Author     : amr  <amr@laptop>
 -- Company    : 
 -- Created    : 2014-10-15
--- Last update: 21-10-2014
+-- Last update: 24-10-2014
 -- Platform   : 
 -- Standard   : VHDL'87
 -------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ entity enc_8_10_rom is
   
   port (
     clk          : in  std_logic;
-    address      : in  std_logic_vector(7 downto 0);
+    address      : in  std_logic_vector(8 downto 0);
     rde          : in  std_logic;
     encoded_data : out std_logic_vector(19 downto 0));
 
@@ -36,7 +36,7 @@ end enc_8_10_rom;
 architecture behav of enc_8_10_rom is
 
   signal vROM_reg  : std_logic_vector(19 downto 0) := (others => '0');
-  signal address_i : unsigned(7 downto 0);
+  signal address_i : unsigned(8 downto 0);
   signal vROM_tmp  : std_logic_vector(19 downto 0);
   
 begin  -- behav
@@ -312,7 +312,19 @@ begin  -- behav
       when 253    => vROM_tmp <= "10" & x"e1" & "01" & x"1e";
       when 254    => vROM_tmp <= "01" & x"e1" & "10" & x"1e";
       when 255    => vROM_tmp <= "10" & x"b1" & "01" & x"4e";
-      when others => vROM_tmp <= (others => '0');
+      when 256    => vROM_tmp <= "0011110100" & "1100001011";
+      when 257    => vROM_tmp <= "0011111001" & "1100000110";
+      when 258    => vROM_tmp <= "0011110101" & "1100001010";
+      when 259    => vROM_tmp <= "0011110011" & "1100001100";
+      when 260    => vROM_tmp <= "0011110010" & "1100001101";
+      when 261    => vROM_tmp <= "0011111010" & "1100000101";
+      when 262    => vROM_tmp <= "0011110110" & "1100001001";
+      when 263    => vROM_tmp <= "0011111000" & "1100000111";
+      when 264    => vROM_tmp <= "1110101000" & "0001010111";
+      when 265    => vROM_tmp <= "1101101000" & "0010010111";
+      when 266    => vROM_tmp <= "1011101000" & "0100010111";
+      when 267    => vROM_tmp <= "0111101000" & "1000010111";
+      when others => vROM_tmp <= (others => 'X');
     end case;
   end process;
 

@@ -7,6 +7,8 @@
 \usepackage{makeidx}
 \makeindex
 \usepackage{graphicx}
+\usepackage{hyperref}
+
 \author{Amr Elhosiny}
 
 \begin{document}
@@ -63,6 +65,9 @@ Will have a toplevel consists of a scrambler core alongside with a controller. T
 
 \subsection{Gen-2}
 
+\section{Source Control}
+The implementation database is managed using git as source control. The git repository could be found in the URL \url{https://github.com/aelhosiny/usb3_phy}.
+
 
 \section{ToDo}
 \begin{itemize}
@@ -73,5 +78,21 @@ Will have a toplevel consists of a scrambler core alongside with a controller. T
 		\item It should be related to all needed datapath clocks with and integer relation.
 	\end{enumerate}
 \end{itemize}
+
+
+\section{Prototype}
+The prototype will be implemented on two FPGA's. One board will act as TX, the other FPGA will act as RX. The two FPGA's will be completely asynchronous.
+Data payload and program will be sent to TX FPGA via one of the possible interfaces:
+\begin{itemize}
+	\item USB-SPI interface.
+	\item Serial interface.
+	\item UART.
+\end{itemize}
+
+Some link layer functions will be implemented in hardware. They will be activated via a set of opcodes sent from the PC-Board interface.
+
+Other possible implementation is to use xilinx micro blaze core to implement some link layer functions. This should implement a more complex solution.
+
+The data out from TX will be serialized using a normal digital serializer just for prototyping. However, both Gen1 and Gen2 PHY's will be designed to meet the operational output rate to the SerDes. The clock frequency could be lowered later to meet prototyping requirements.
 
 \end{document}

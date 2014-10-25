@@ -6,7 +6,7 @@
 -- Author     : amr  <amr@laptop>
 -- Company    : 
 -- Created    : 2014-10-17
--- Last update: 20-10-2014
+-- Last update: 24-10-2014
 -- Platform   : 
 -- Standard   : VHDL'87
 -------------------------------------------------------------------------------
@@ -27,20 +27,24 @@ use work.usb3_pkg.all;
 entity scrambler_core_gen1 is
   
   port (
+    -- scrambler clock    
     clk          : in  std_logic;
-    -- scrambler clock
+    -- synchronous active high reset    
     rst          : in  std_logic;
-    -- synchronous active high reset
+    -- enable LFSR advance   
     advance_lfsr : in  std_logic;
-    -- enable LFSR advance
+    -- XOR input data with LFSR out    
     xor_data     : in  std_logic;
-    -- XOR input data with LFSR out
+    -- Initialize the LFSR   
     init_lfsr    : in  std_logic;
-    -- Initialize the LFSR
+    -- valid input
+    validin      : in  std_logic;
+    -- Input data byte    
     din          : in  std_logic_vector(7 downto 0);
-    -- Input data byte
+    -- valid out flag
+    validout     : out std_logic;
+    -- Scrambled output    
     dout         : out std_logic_vector(7 downto 0)
-    -- Scrambled output
     );
 
 end scrambler_core_gen1;
@@ -54,10 +58,11 @@ architecture behav of scrambler_core_gen1 is
   signal   dout_nxt      : std_logic_vector(7 downto 0);
   signal   dout_reg      : std_logic_vector(7 downto 0)  := (others => '0');
   constant data_mirror_c : std_logic                     := '0';
+  signal   vldout_reg    : std_logic                     := '0';
 
 begin  -- behav
 
-
+  
   mirror_din1 : if data_mirror_c = '1' generate
     mr_lp : for i in 0 to 7 generate
       din_int(i) <= din(7-i);
@@ -92,13 +97,15 @@ begin  -- behav
   begin  -- process clk_pr
     if rising_edge(clk) then
       if rst = '1' then
-        lfsr_reg <= lfsr_init_gen1_c;
+        lfsr_reg   <= lfsr_init_gen1_c;
+        vldout_reg <= '0';
       else
         if init_lfsr = '1' then
           lfsr_reg <= lfsr_init_gen1_c;
         elsif advance_lfsr = '1' then
           lfsr_reg <= lfsr_a(8);
         end if;
+        vldout_reg <= validin;
       end if;
     end if;
   end process clk_pr;
@@ -112,12 +119,14 @@ begin  -- behav
     if rising_edge(clk) then
       if xor_data = '1' then
         dout_reg <= dout_nxt;
-      else
+      elsif (validin = '1') then
         dout_reg <= din_int;
       end if;
     end if;
   end process dout_Reg_pr;
 
-  dout <= dout_reg;
+  dout     <= dout_reg;
+  validout <= vldout_reg;
+
   
 end behav;
