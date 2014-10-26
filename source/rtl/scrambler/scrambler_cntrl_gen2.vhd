@@ -37,14 +37,39 @@ entity scrambler_cntrl_gen2 is
     symbol_type  : in  std_logic_vector(op_gen2_width_c-1 downto 0);
     -- data valid input flag
     validin      : in  std_logic;
+    -- DC balance operation   
+    DC_balance   : in  std_logic;
     -- reinitiate scrambelr LFSR
     init_lfsr    : out std_logic;
     -- enable LFSR advance    
-    advance_lfsr : in  std_logic;
+    advance_lfsr : out std_logic;
     -- XOR input data with LFSR out    
-    xor_data     : in  std_logic;
-    -- output data valid flag
-    validout     : out std_logic
+    xor_data     : out std_logic
     );
 
 end entity scrambler_cntrl_gen2;
+
+
+architecture behav of scrambler_cntrl_gen2 is
+
+  signal scrm_cntrl_s   : std_logic_vector(1 downto 0);
+  
+begin  -- architecture behav
+
+  scrm_cntrl_s <= "10" when
+                  (unsigned(symbol_index) = 0 and
+                   (symbol_type = op_TS1_gen2 or symbol_type = op_TS2_gen2 or symbol_type = op_TSEQ_gen2)) or
+                  ((unsigned(symbol_index) = 14 or unsigned(symbol_index) = 15) and DC_balance = '1' and
+                   (symbol_type = op_TS1_gen2 or symbol_type = op_TS2_gen2 or symbol_type = op_TSEQ_gen2)) or
+                  (symbol_type = op_SDS_gen2)
+                  else
+                  "00" when
+                  (symbol_type = op_SKP_gen2 or symbol_type = op_SKPEND_gen2 or symbol_type = op_SYNC_gen2)
+                  else
+                  "11";
+  advance_lfsr <= scrm_cntrl_s(1) and validin;
+  xor_data     <= scrm_cntrl_s(0) and validin;
+
+  init_lfsr <= '1' when (symbol_type = op_SYNC_gen2 and unsigned(symbol_index) = 15) else '0';
+
+end architecture behav;

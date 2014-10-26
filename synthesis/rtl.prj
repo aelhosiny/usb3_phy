@@ -11,3 +11,4 @@ vhdl work $ROOT_DIR/source/rtl/hs/hs_1to1.vhd
 vhdl work $ROOT_DIR/source/rtl/encoder/enc_8_10_core.vhd
 vhdl work $ROOT_DIR/source/rtl/common/oz_count.vhd
 vhdl work $ROOT_DIR/source/rtl/TX/tx_core_gen1.vhd
+vhdl work $ROOT_DIR/source/rtl/scrambler/scrambler_cntrl_gen2.vhd
