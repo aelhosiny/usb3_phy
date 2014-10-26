@@ -6,7 +6,7 @@
 -- Author     : amr  <amr@laptop>
 -- Company    : 
 -- Created    : 2014-10-17
--- Last update: 24-10-2014
+-- Last update: 26-10-2014
 -- Platform   : 
 -- Standard   : VHDL'87
 -------------------------------------------------------------------------------
@@ -20,7 +20,7 @@
 -------------------------------------------------------------------------------
 
 library ieee;
-use ieee.numeric_bit.all;
+use ieee.numeric_std.all;
 use ieee.std_logic_1164.all;
 
 package usb3_pkg is
@@ -580,21 +580,41 @@ package usb3_pkg is
   constant op_k29_7 : std_logic_vector(3 downto 0) := "1010";
   constant op_k30_7 : std_logic_vector(3 downto 0) := "1011";
 
-  constant SKP_gen2    : std_logic_vector(7 downto 0) := x"CC";
-  constant SKPEND_gen2 : std_logic_vector(7 downto 0) := x"33";
-  constant SDP_gen2    : std_logic_vector(7 downto 0) := x"96";
-  constant EDP_gen2    : std_logic_vector(7 downto 0) := x"69";
-  constant SHP_gen2    : std_logic_vector(7 downto 0) := x"9A";
-  constant DPHP_gen2   : std_logic_vector(7 downto 0) := x"95";
-  constant END_gen2    : std_logic_vector(7 downto 0) := x"65";
-  constant SLC_gen2    : std_logic_vector(7 downto 0) := x"5A";
-  constant EPF_gen2    : std_logic_vector(7 downto 0) := x"36";
-  constant SDS_gen2    : std_logic_vector(7 downto 0) := x"63";
+  constant sym_SKP_gen2    : std_logic_vector(7 downto 0) := x"CC";
+  constant sym_SKPEND_gen2 : std_logic_vector(7 downto 0) := x"33";
+  constant sym_SDP_gen2    : std_logic_vector(7 downto 0) := x"96";
+  constant sym_EDP_gen2    : std_logic_vector(7 downto 0) := x"69";
+  constant sym_SHP_gen2    : std_logic_vector(7 downto 0) := x"9A";
+  constant sym_DPHP_gen2   : std_logic_vector(7 downto 0) := x"95";
+  constant sym_END_gen2    : std_logic_vector(7 downto 0) := x"65";
+  constant sym_SLC_gen2    : std_logic_vector(7 downto 0) := x"5A";
+  constant sym_EPF_gen2    : std_logic_vector(7 downto 0) := x"36";
+  constant sym_SDS_gen2    : std_logic_vector(7 downto 0) := x"63";
 
   constant lfsr_init_gen1_c : std_logic_vector(15 downto 0) := x"FFFF";
   constant lfsr_init_gen2_c : std_logic_vector(22 downto 0) := "001" & x"DBFBC";
 
   function log2 (inlength : integer) return integer;
+
+  constant op_gen2_ops_c   : integer                                      := 16;
+  constant op_gen2_width_c : integer                                      := log2(op_gen2_ops_c);
+  constant op_TS1_gen2     : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(0, op_gen2_width_c));
+  constant op_TS2_gen2     : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(1, op_gen2_width_c));
+  constant op_TSEQ_gen2    : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(2, op_gen2_width_c));
+  constant op_SYNC_gen2    : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(3, op_gen2_width_c));
+  constant op_SKP_gen2     : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(4, op_gen2_width_c));
+  constant op_SKPEND_gen2  : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(5, op_gen2_width_c));
+  constant op_SDP_gen2     : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(6, op_gen2_width_c));
+  constant op_EDP_gen2     : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(7, op_gen2_width_c));
+  constant op_DPHP_gen2    : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(8, op_gen2_width_c));
+  constant op_END_gen2     : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(9, op_gen2_width_c));
+  constant op_SLC_gen2     : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(10, op_gen2_width_c));
+  constant op_EPF_gen2     : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(11, op_gen2_width_c));
+  constant op_SDS_gen2     : std_logic_vector(op_gen2_width_c-1 downto 0) := std_logic_vector(to_unsigned(12, op_gen2_width_c));
+
+
+  
+  
   
 end usb3_pkg;
 
@@ -609,6 +629,9 @@ package body usb3_pkg is
     end loop;  -- i
     return i;
   end function log2;
+
+
+
   
 end usb3_pkg;
 
